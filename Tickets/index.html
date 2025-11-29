@@ -41,6 +41,62 @@
             padding: 0 20px;
         }
 
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .video-background iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+
+        /* Intro Video */
+        .intro-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .intro-video.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-video iframe {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            max-height: 675px;
+        }
+
         /* Header */
         header {
             background-color: var(--bg-card);
@@ -77,17 +133,6 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(88, 101, 242, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
-            z-index: -1;
         }
 
         .hero h1 {
@@ -332,6 +377,17 @@
     </style>
 </head>
 <body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <iframe id="bg-video" src="https://www.youtube.com/embed/Fmdbcf5qVjk?autoplay=1&mute=1&loop=1&playlist=Fmdbcf5qVjk&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="video-overlay"></div>
+
+    <!-- Intro Video -->
+    <div class="intro-video" id="intro-video">
+        <iframe id="intro-video-frame" src="https://www.youtube.com/embed/zwDX9_FDrRQ?autoplay=1&mute=1&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -427,6 +483,31 @@
     </footer>
 
     <script>
+        // Handle intro video
+        document.addEventListener('DOMContentLoaded', function() {
+            const introVideo = document.getElementById('intro-video');
+            const bgVideo = document.getElementById('bg-video');
+            
+            // Hide intro video after 11 seconds
+            setTimeout(function() {
+                introVideo.classList.add('hidden');
+                
+                // After fade transition completes, remove the iframe to stop video
+                setTimeout(function() {
+                    const introFrame = document.getElementById('intro-video-frame');
+                    if (introFrame) {
+                        introFrame.src = ''; // Stop the video
+                    }
+                }, 1000); // Wait for the fade transition to complete
+            }, 11000); // 11 seconds
+            
+            // Change background video every 30 minutes (1800000 ms)
+            setInterval(function() {
+                // Force refresh of background video
+                bgVideo.src = bgVideo.src;
+            }, 1800000);
+        });
+
         // Form submission handler
         document.getElementById('bugReportForm').addEventListener('submit', function(e) {
             e.preventDefault();
