@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Support System - Bug Reports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5865F2;
+            --primary-dark: #4752C4;
+            --success: #57F287;
+            --danger: #ED4245;
+            --warning: #FEE75C;
+            --text: #2C2F33;
+            --text-light: #4F545C;
+            --bg: #FFFFFF;
+            --bg-secondary: #F2F3F5;
+            --bg-card: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(88, 101, 242, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(88, 101, 242, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--bg-secondary);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        /* Bug Report Form */
+        .bug-report {
+            padding: 100px 0;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .severity-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .severity-option {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .severity-option input {
+            display: none;
+        }
+
+        .severity-option label {
+            display: block;
+            padding: 12px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .severity-option input:checked + label {
+            border-color: var(--primary);
+            background-color: rgba(88, 101, 242, 0.1);
+            color: var(--primary);
+        }
+
+        .severity-low input:checked + label {
+            border-color: var(--success);
+            background-color: rgba(87, 242, 135, 0.1);
+            color: var(--success);
+        }
+
+        .severity-medium input:checked + label {
+            border-color: var(--warning);
+            background-color: rgba(254, 231, 92, 0.1);
+            color: #B38C00;
+        }
+
+        .severity-high input:checked + label {
+            border-color: var(--danger);
+            background-color: rgba(237, 66, 69, 0.1);
+            color: var(--danger);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary);
+            padding: 60px 0 30px;
+            color: var(--text-light);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg-card);
+            border-radius: 50%;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+        }
+
+        /* Success/Error Messages */
+        .alert {
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: rgba(87, 242, 135, 0.2);
+            border: 1px solid var(--success);
+            color: #0A6B2F;
+        }
+
+        .alert-error {
+            background-color: rgba(237, 66, 69, 0.2);
+            border: 1px solid var(--danger);
+            color: #A11A1D;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>Link Support</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#report">Report Bug</a>
+                    <a href="#stats">Statistics</a>
+                </div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Link Support System</h1>
+            <p>Advanced Discord bot with ticket management, performance logging, and automated support features. Report bugs and help us improve!</p>
+            <div class="hero-buttons">
+                <a href="#report" class="btn btn-primary">
+                    <i class="fas fa-bug"></i> Report a Bug
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i> Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Advanced Features</h2>
+                <p>Discover the powerful capabilities of our Discord support system</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <h3>Ticket System</h3>
+                    <p>Advanced support ticket management with auto-claiming, timing, and built-in moderation tools.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Performance Logging</h3>
+                    <p>Real-time performance monitoring with detailed analytics and system metrics tracking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Auto Moderation</h3>
+                    <p>Smart spam detection, support team management, and automated response systems.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Time Management</h3>
+                    <p>Response timers, completion tracking, and automated reminders for support staff.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data Management</h3>
+                    <p>Secure data storage with advanced logging, metrics tracking, and backup systems.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Multi-Server Support</h3>
+                    <p>Works across multiple Discord servers with centralized management and reporting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bug Report Form -->
+    <section class="bug-report" id="report">
+        <div class="container">
+            <div class="section-title">
+                <h2>Report a Bug</h2>
+                <p>Found an issue? Let us know so we can fix it!</p>
+            </div>
+            <div class="form-container">
+                <div id="alert-success" class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> Bug report submitted successfully!
+                </div>
+                <div id="alert-error" class="alert alert-error">
+                    <i class="fas fa-exclamation-circle"></i> There was an error submitting your report. Please try again.
+                </div>
+                
+                <form id="bugReportForm">
+                    <div class="form-group">
+                        <label for="title">Bug Title *</label>
+                        <input type="text" id="title" class="form-control" placeholder="Brief description of the issue" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <textarea id="description" class="form-control" placeholder="Detailed description of the bug, including what you expected to happen and what actually happened" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="steps">Steps to Reproduce *</label>
+                        <textarea id="steps" class="form-control" placeholder="Step-by-step instructions to reproduce the issue" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Severity *</label>
+                        <div class="severity-options">
+                            <div class="severity-option severity-low">
+                                <input type="radio" id="severity-low" name="severity" value="low" required>
+                                <label for="severity-low">Low</label>
+                            </div>
+                            <div class="severity-option severity-medium">
+                                <input type="radio" id="severity-medium" name="severity" value="medium" required>
+                                <label for="severity-medium">Medium</label>
+                            </div>
+                            <div class="severity-option severity-high">
+                                <input type="radio" id="severity-high" name="severity" value="high" required>
+                                <label for="severity-high">High</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Contact Email (Optional)</label>
+                        <input type="email" id="email" class="form-control" placeholder="Your email for follow-up questions">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Submit Bug Report
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Link Support</h3>
+                    <p>Advanced Discord bot for managing support tickets, performance logging, and automated moderation.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#report">Report Bug</a></li>
+                        <li><a href="#">Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Support Server</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Link Support System. All rights reserved. | Version 2.1</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handler
+        document.getElementById('bugReportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                steps: document.getElementById('steps').value,
+                severity: document.querySelector('input[name="severity"]:checked').value,
+                email: document.getElementById('email').value || 'Not provided',
+                timestamp: new Date().toISOString()
+            };
+            
+            // Show loading state
+            const submitBtn = document.querySelector('#bugReportForm button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitBtn.disabled = true;
+            
+            // Send to Discord webhook
+            sendToDiscordWebhook(formData)
+                .then(success => {
+                    if (success) {
+                        document.getElementById('alert-success').style.display = 'block';
+                        document.getElementById('alert-error').style.display = 'none';
+                        document.getElementById('bugReportForm').reset();
+                    } else {
+                        document.getElementById('alert-error').style.display = 'block';
+                        document.getElementById('alert-success').style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('alert-error').style.display = 'block';
+                    document.getElementById('alert-success').style.display = 'none';
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Hide alerts after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('alert-success').style.display = 'none';
+                        document.getElementById('alert-error').style.display = 'none';
+                    }, 5000);
+                });
+        });
+        
+        // Function to send data to Discord webhook
+        function sendToDiscordWebhook(data) {
+            const webhookURL = 'https://discord.com/api/webhooks/1444301155093057638/Fl6FlPZoOvX9kVqt7KCpry-qfmcBCex0-lqq8mTpXNQMh9FxcnDmGcFbnbeq2nPZn923';
+            
+            // Create Discord embed
+            const embed = {
+                title: `🐛 Bug Report: ${data.title}`,
+                color: getSeverityColor(data.severity),
+                fields: [
+                    {
+                        name: "Description",
+                        value: data.description.length > 1024 ? data.description.substring(0, 1021) + "..." : data.description
+                    },
+                    {
+                        name: "Steps to Reproduce",
+                        value: data.steps.length > 1024 ? data.steps.substring(0, 1021) + "..." : data.steps
+                    },
+                    {
+                        name: "Severity",
+                        value: data.severity.charAt(0).toUpperCase() + data.severity.slice(1),
+                        inline: true
+                    },
+                    {
+                        name: "Contact Email",
+                        value: data.email,
+                        inline: true
+                    }
+                ],
+                timestamp: data.timestamp,
+                footer: {
+                    text: "Link Support System v2.1"
+                }
+            };
+            
+            const payload = {
+                embeds: [embed],
+                username: "Bug Report Bot",
+                avatar_url: "https://cdn.discordapp.com/emojis/🐛.png"
+            };
+            
+            return fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.ok)
+            .catch(error => {
+                console.error('Webhook error:', error);
+                return false;
+            });
+        }
+        
+        // Helper function to get color based on severity
+        function getSeverityColor(severity) {
+            switch(severity) {
+                case 'low': return 0x57F287; // Green
+                case 'medium': return 0xFEE75C; // Yellow
+                case 'high': return 0xED4245; // Red
+                default: return 0x5865F2; // Blurple
+            }
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>
