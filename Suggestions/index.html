@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Support - Suggestions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5865F2;
+            --primary-dark: #4752C4;
+            --success: #57F287;
+            --danger: #ED4245;
+            --warning: #FEE75C;
+            --text: #2C2F33;
+            --text-light: #4F545C;
+            --bg: #FFFFFF;
+            --bg-secondary: #F2F3F5;
+            --bg-card: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .video-background iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+
+        /* Intro Video */
+        .intro-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+            overflow: hidden;
+        }
+
+        .intro-video.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-video iframe {
+            width: 140%;
+            height: 140%;
+            transform: scale(1.4);
+            transform-origin: center center;
+            border: none;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        /* Suggestions Form */
+        .suggestions {
+            padding: 40px 0 80px;
+        }
+
+        .form-container {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .category-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .category-option {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .category-option input {
+            display: none;
+        }
+
+        .category-option label {
+            display: block;
+            padding: 12px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .category-option input:checked + label {
+            border-color: var(--primary);
+            background-color: rgba(88, 101, 242, 0.1);
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary);
+            padding: 40px 0 20px;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Success/Error Messages */
+        .alert {
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: rgba(87, 242, 135, 0.2);
+            border: 1px solid var(--success);
+            color: #0A6B2F;
+        }
+
+        .alert-error {
+            background-color: rgba(237, 66, 69, 0.2);
+            border: 1px solid var(--danger);
+            color: #A11A1D;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+            
+            .category-options {
+                flex-direction: column;
+            }
+            
+            .intro-video iframe {
+                width: 180%;
+                height: 180%;
+                transform: scale(1.8);
+            }
+            
+            .nav-links {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <iframe id="bg-video" src="https://www.youtube.com/embed/Fmdbcf5qVjk?autoplay=1&mute=1&loop=1&playlist=Fmdbcf5qVjk&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="video-overlay"></div>
+
+    <!-- Intro Video -->
+    <div class="intro-video" id="intro-video">
+        <iframe id="intro-video-frame" src="https://www.youtube.com/embed/zwDX9_FDrRQ?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>Link Support</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Bug Reports</a>
+                    <a href="suggestions.html" class="active">Suggestions</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Feature Suggestions</h1>
+            <p>Have an idea to improve the Link Support bot? Share your suggestions with us!</p>
+        </div>
+    </section>
+
+    <!-- Suggestions Form -->
+    <section class="suggestions">
+        <div class="container">
+            <div class="form-container">
+                <div id="alert-success" class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> Suggestion submitted successfully!
+                </div>
+                <div id="alert-error" class="alert alert-error">
+                    <i class="fas fa-exclamation-circle"></i> There was an error submitting your suggestion. Please try again.
+                </div>
+                
+                <form id="suggestionForm">
+                    <div class="form-group">
+                        <label for="title">Suggestion Title *</label>
+                        <input type="text" id="title" class="form-control" placeholder="Brief description of your suggestion" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Detailed Description *</label>
+                        <textarea id="description" class="form-control" placeholder="Please describe your suggestion in detail. What problem does it solve? How would it work?" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="benefits">Expected Benefits *</label>
+                        <textarea id="benefits" class="form-control" placeholder="How would this improve the bot? Who would benefit from this feature?" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Category *</label>
+                        <div class="category-options">
+                            <div class="category-option">
+                                <input type="radio" id="category-ticket" name="category" value="ticket" required>
+                                <label for="category-ticket">Ticket System</label>
+                            </div>
+                            <div class="category-option">
+                                <input type="radio" id="category-moderation" name="category" value="moderation" required>
+                                <label for="category-moderation">Moderation</label>
+                            </div>
+                            <div class="category-option">
+                                <input type="radio" id="category-performance" name="category" value="performance" required>
+                                <label for="category-performance">Performance</label>
+                            </div>
+                            <div class="category-option">
+                                <input type="radio" id="category-other" name="category" value="other" required>
+                                <label for="category-other">Other</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Contact Email (Optional)</label>
+                        <input type="email" id="email" class="form-control" placeholder="Your email for follow-up questions">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-lightbulb"></i> Submit Suggestion
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Link Support - Advanced Discord bot for managing support tickets, performance logging, and automated moderation.</p>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Link Support System. All rights reserved. | Version 1.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Handle intro video
+        document.addEventListener('DOMContentLoaded', function() {
+            const introVideo = document.getElementById('intro-video');
+            const bgVideo = document.getElementById('bg-video');
+            
+            // Hide intro video after 11 seconds
+            setTimeout(function() {
+                introVideo.classList.add('hidden');
+                
+                // After fade transition completes, remove the iframe to stop video
+                setTimeout(function() {
+                    const introFrame = document.getElementById('intro-video-frame');
+                    if (introFrame) {
+                        introFrame.src = ''; // Stop the video
+                    }
+                }, 1000); // Wait for the fade transition to complete
+            }, 11000); // 11 seconds
+            
+            // Change background video every 30 minutes (1800000 ms)
+            setInterval(function() {
+                // Force refresh of background video
+                bgVideo.src = bgVideo.src;
+            }, 1800000);
+        });
+
+        // Form submission handler
+        document.getElementById('suggestionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                benefits: document.getElementById('benefits').value,
+                category: document.querySelector('input[name="category"]:checked').value,
+                email: document.getElementById('email').value || 'Not provided',
+                timestamp: new Date().toISOString()
+            };
+            
+            // Show loading state
+            const submitBtn = document.querySelector('#suggestionForm button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitBtn.disabled = true;
+            
+            // Send to Discord webhook
+            sendToDiscordWebhook(formData)
+                .then(success => {
+                    if (success) {
+                        document.getElementById('alert-success').style.display = 'block';
+                        document.getElementById('alert-error').style.display = 'none';
+                        document.getElementById('suggestionForm').reset();
+                    } else {
+                        document.getElementById('alert-error').style.display = 'block';
+                        document.getElementById('alert-success').style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('alert-error').style.display = 'block';
+                    document.getElementById('alert-success').style.display = 'none';
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Hide alerts after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('alert-success').style.display = 'none';
+                        document.getElementById('alert-error').style.display = 'none';
+                    }, 5000);
+                });
+        });
+        
+        // Function to send data to Discord webhook
+        function sendToDiscordWebhook(data) {
+            const webhookURL = 'https://discord.com/api/webhooks/1444301155093057638/Fl6FlPZoOvX9kVqt7KCpry-qfmcBCex0-lqq8mTpXNQMh9FxcnDmGcFbnbeq2nPZn923';
+            
+            // Create Discord embed
+            const embed = {
+                title: `💡 Feature Suggestion: ${data.title}`,
+                color: 0x0099FF,
+                fields: [
+                    {
+                        name: "Description",
+                        value: data.description.length > 1024 ? data.description.substring(0, 1021) + "..." : data.description
+                    },
+                    {
+                        name: "Expected Benefits",
+                        value: data.benefits.length > 1024 ? data.benefits.substring(0, 1021) + "..." : data.benefits
+                    },
+                    {
+                        name: "Category",
+                        value: data.category.charAt(0).toUpperCase() + data.category.slice(1),
+                        inline: true
+                    },
+                    {
+                        name: "Contact Email",
+                        value: data.email,
+                        inline: true
+                    }
+                ],
+                timestamp: data.timestamp,
+                footer: {
+                    text: "Link Support System v1.0"
+                }
+            };
+            
+            const payload = {
+                embeds: [embed],
+                username: "Suggestion Bot",
+                avatar_url: "https://cdn.discordapp.com/emojis/💡.png"
+            };
+            
+            return fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.ok)
+            .catch(error => {
+                console.error('Webhook error:', error);
+                return false;
+            });
+        }
+    </script>
+</body>
+</html>
