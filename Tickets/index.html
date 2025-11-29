@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Support System - Bug Reports</title>
+    <title>Link Support - Bug Reports</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -36,12 +36,12 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Header & Navigation */
+        /* Header */
         header {
             background-color: var(--bg-card);
             box-shadow: var(--shadow);
@@ -71,47 +71,9 @@
             font-size: 1.8rem;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
         /* Hero Section */
         .hero {
-            padding: 100px 0;
+            padding: 80px 0 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -129,8 +91,8 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -138,133 +100,24 @@
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto 40px;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: var(--radius);
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(88, 101, 242, 0.1);
-            transform: translateY(-3px);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background-color: var(--bg-secondary);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--text);
-        }
-
-        .section-title p {
+            font-size: 1.1rem;
             color: var(--text-light);
             max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background-color: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 30px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: white;
-            font-size: 1.8rem;
-        }
-
-        .feature-card h3 {
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        .feature-card p {
-            color: var(--text-light);
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease 0.2s both;
         }
 
         /* Bug Report Form */
         .bug-report {
-            padding: 100px 0;
+            padding: 40px 0 80px;
         }
 
         .form-container {
-            max-width: 800px;
-            margin: 0 auto;
             background-color: var(--bg-card);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             padding: 40px;
+            animation: fadeInUp 1s ease 0.4s both;
         }
 
         .form-group {
@@ -348,47 +201,47 @@
             color: var(--danger);
         }
 
+        .btn {
+            padding: 12px 30px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3);
+        }
+
         /* Footer */
         footer {
             background-color: var(--bg-secondary);
-            padding: 60px 0 30px;
+            padding: 40px 0 20px;
             color: var(--text-light);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            margin-bottom: 20px;
-            color: var(--text);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
+            text-align: center;
         }
 
         .social-links {
             display: flex;
+            justify-content: center;
             gap: 15px;
             margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         .social-links a {
@@ -410,8 +263,7 @@
         }
 
         .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
+            padding-top: 20px;
             border-top: 1px solid #ddd;
         }
 
@@ -443,35 +295,6 @@
             animation: pulse 2s infinite;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .form-container {
-                padding: 20px;
-            }
-        }
-
         /* Success/Error Messages */
         .alert {
             padding: 15px;
@@ -491,6 +314,21 @@
             border: 1px solid var(--danger);
             color: #A11A1D;
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+            
+            .severity-options {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
@@ -502,96 +340,21 @@
                     <i class="fas fa-robot"></i>
                     <span>Link Support</span>
                 </div>
-                <div class="nav-links">
-                    <a href="#home">Home</a>
-                    <a href="#features">Features</a>
-                    <a href="#report">Report Bug</a>
-                    <a href="#stats">Statistics</a>
-                </div>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero">
         <div class="container">
-            <h1>Link Support System</h1>
-            <p>Advanced Discord bot with ticket management, performance logging, and automated support features. Report bugs and help us improve!</p>
-            <div class="hero-buttons">
-                <a href="#report" class="btn btn-primary">
-                    <i class="fas fa-bug"></i> Report a Bug
-                </a>
-                <a href="#features" class="btn btn-secondary">
-                    <i class="fas fa-info-circle"></i> Learn More
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>Advanced Features</h2>
-                <p>Discover the powerful capabilities of our Discord support system</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-ticket-alt"></i>
-                    </div>
-                    <h3>Ticket System</h3>
-                    <p>Advanced support ticket management with auto-claiming, timing, and built-in moderation tools.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Performance Logging</h3>
-                    <p>Real-time performance monitoring with detailed analytics and system metrics tracking.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Auto Moderation</h3>
-                    <p>Smart spam detection, support team management, and automated response systems.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Time Management</h3>
-                    <p>Response timers, completion tracking, and automated reminders for support staff.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3>Data Management</h3>
-                    <p>Secure data storage with advanced logging, metrics tracking, and backup systems.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Multi-Server Support</h3>
-                    <p>Works across multiple Discord servers with centralized management and reporting.</p>
-                </div>
-            </div>
+            <h1>Bug Report System</h1>
+            <p>Found an issue with the Link Support bot? Let us know so we can fix it!</p>
         </div>
     </section>
 
     <!-- Bug Report Form -->
-    <section class="bug-report" id="report">
+    <section class="bug-report">
         <div class="container">
-            <div class="section-title">
-                <h2>Report a Bug</h2>
-                <p>Found an issue? Let us know so we can fix it!</p>
-            </div>
             <div class="form-container">
                 <div id="alert-success" class="alert alert-success">
                     <i class="fas fa-check-circle"></i> Bug report submitted successfully!
@@ -639,7 +402,7 @@
                         <input type="email" id="email" class="form-control" placeholder="Your email for follow-up questions">
                     </div>
                     
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <button type="submit" class="btn btn-primary">
                         <i class="fas fa-paper-plane"></i> Submit Bug Report
                     </button>
                 </form>
@@ -650,37 +413,15 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Link Support</h3>
-                    <p>Advanced Discord bot for managing support tickets, performance logging, and automated moderation.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#report">Report Bug</a></li>
-                        <li><a href="#">Documentation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Support Server</a></li>
-                        <li><a href="#">API Documentation</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
+            <p>Link Support - Advanced Discord bot for managing support tickets, performance logging, and automated moderation.</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2023 Link Support System. All rights reserved. | Version 2.1</p>
+                <p>&copy; 2025 Link Support System. All rights reserved. | Version 1.0</p>
             </div>
         </div>
     </footer>
@@ -765,7 +506,7 @@
                 ],
                 timestamp: data.timestamp,
                 footer: {
-                    text: "Link Support System v2.1"
+                    text: "Link Support System v1.0"
                 }
             };
             
@@ -798,30 +539,6 @@
                 default: return 0x5865F2; // Blurple
             }
         }
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
     </script>
 </body>
 </html>
