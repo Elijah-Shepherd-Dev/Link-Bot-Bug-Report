@@ -83,6 +83,7 @@
             align-items: center;
             opacity: 1;
             transition: opacity 1s ease-in-out;
+            overflow: hidden;
         }
 
         .intro-video.hidden {
@@ -91,10 +92,11 @@
         }
 
         .intro-video iframe {
-            width: 100%;
-            height: 100%;
-            max-width: 1200px;
-            max-height: 675px;
+            width: 140%;
+            height: 140%;
+            transform: scale(1.4);
+            transform-origin: center center;
+            border: none;
         }
 
         /* Header */
@@ -281,32 +283,6 @@
             text-align: center;
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--bg-card);
-            border-radius: 50%;
-            color: var(--text-light);
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-        }
-
         .footer-bottom {
             padding-top: 20px;
             border-top: 1px solid #ddd;
@@ -373,6 +349,12 @@
             .severity-options {
                 flex-direction: column;
             }
+            
+            .intro-video iframe {
+                width: 180%;
+                height: 180%;
+                transform: scale(1.8);
+            }
         }
     </style>
 </head>
@@ -385,7 +367,7 @@
 
     <!-- Intro Video -->
     <div class="intro-video" id="intro-video">
-        <iframe id="intro-video-frame" src="https://www.youtube.com/embed/zwDX9_FDrRQ?autoplay=1&mute=1&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="intro-video-frame" src="https://www.youtube.com/embed/zwDX9_FDrRQ?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 
     <!-- Header -->
@@ -470,11 +452,6 @@
     <footer>
         <div class="container">
             <p>Link Support - Advanced Discord bot for managing support tickets, performance logging, and automated moderation.</p>
-            
-            <div class="social-links">
-                <a href="#"><i class="fab fa-discord"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-            </div>
             
             <div class="footer-bottom">
                 <p>&copy; 2025 Link Support System. All rights reserved. | Version 1.0</p>
